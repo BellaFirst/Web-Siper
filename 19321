@@ -1,4 +1,10 @@
+##Requests库入门
+
+##example1
 import requests
 r=requests.get("http://www.baidu.com")
 print(r.status_code)##200
-type(r)##
+type(r)##<class 'requests.models.Response'>
+
+##Response对象属性
+![image]()
