@@ -7,4 +7,5 @@ print(r.status_code)##200
 type(r)##<class 'requests.models.Response'>
 
 ##Response对象属性
-![image]()
+![image](https://github.com/BellaFirst/Web-Siper/blob/master/response.png)
+
