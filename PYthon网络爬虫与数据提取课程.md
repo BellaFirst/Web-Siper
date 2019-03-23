@@ -151,30 +151,28 @@ print(type(tag))
     
 #基于bs4库的HTML内容遍历方法
 #HTML基本格式
-<html>---<body>---<p>---<a>---遍历方法：下行遍历、上行遍历、平行遍历
-   /       /       /
- <head>   <p>     <a>
-   /       /
- <title>  <b>
+<html>——<body>——<p>——<a>   遍历方法：下行遍历、上行遍历、平行遍历
+<head>   <p>     <a>
+<title>  <b>
  1.标签树的下行遍历
- .contents   子节点的列表，将<tag>所有儿子节点存入列表
- .children   子节点的迭代类型，与.contents类似，用于遍历儿子节点
- .descendants子孙节点的迭代类型，包含所有子孙节点，用于循环遍历
- eg：for child in soup.body.contents:
+.contents   子节点的列表，将<tag>所有儿子节点存入列表
+.children   子节点的迭代类型，与.contents类似，用于遍历儿子节点
+.descendants子孙节点的迭代类型，包含所有子孙节点，用于循环遍历
+eg：for child in soup.body.contents:
         print(child)
- 2.标签树的上行遍历
- .parent  节点的父亲标签
- .parents 节点先辈标签的迭代类型，用于循环遍历先辈节点（用循环的方式获取）
-  eg：for parent in soup.a.parents:
+2.标签树的上行遍历
+.parent  节点的父亲标签
+.parents 节点先辈标签的迭代类型，用于循环遍历先辈节点（用循环的方式获取）
+eg：for parent in soup.a.parents:
         if parent is None:
            print(parent)
        else:
            print(parent.name)  
- 3.平行遍历（**必须发生在同一个父节点下的各节点间）
- .next_sibling       返回按照HTML文本顺序的下一个平行节点标签
- .previous_sibling   。。。。。。。。。。。上。。。。。。。。
- .next_siblings      迭代类型，返回按照HTML文本顺序的后续所有平行节点标签
- .previous_siblings  。。。。。。。。。。。。。。。。前续。。。。。。。。
+3.平行遍历（**必须发生在同一个父节点下的各节点间）
+.next_sibling       返回按照HTML文本顺序的下一个平行节点标签
+.previous_sibling   。。。。。。。。。。。上。。。。。。。。
+.next_siblings      迭代类型，返回按照HTML文本顺序的后续所有平行节点标签
+.previous_siblings  。。。。。。。。。。。。。。。。前续。。。。。。。。
 
 #基于bs4库的HTML格式化和编码
 soup.prettify()
