@@ -149,10 +149,74 @@ print(tag.attrs['href'])#连接属性
 print(type(tag.attrs))#标签属性
 print(type(tag))
     
+#基于bs4库的HTML内容遍历方法
+#HTML基本格式
+<html>---<body>---<p>---<a>---遍历方法：下行遍历、上行遍历、平行遍历
+   /       /       /
+ <head>   <p>     <a>
+   /       /
+ <title>  <b>
+ 1.标签树的下行遍历
+ .contents   子节点的列表，将<tag>所有儿子节点存入列表
+ .children   子节点的迭代类型，与.contents类似，用于遍历儿子节点
+ .descendants子孙节点的迭代类型，包含所有子孙节点，用于循环遍历
+ eg：for child in soup.body.contents:
+        print(child)
+ 2.标签树的上行遍历
+ .parent  节点的父亲标签
+ .parents 节点先辈标签的迭代类型，用于循环遍历先辈节点（用循环的方式获取）
+  eg：for parent in soup.a.parents:
+        if parent is None:
+           print(parent)
+       else:
+           print(parent.name)  
+ 3.平行遍历（**必须发生在同一个父节点下的各节点间）
+ .next_sibling       返回按照HTML文本顺序的下一个平行节点标签
+ .previous_sibling   。。。。。。。。。。。上。。。。。。。。
+ .next_siblings      迭代类型，返回按照HTML文本顺序的后续所有平行节点标签
+ .previous_siblings  。。。。。。。。。。。。。。。。前续。。。。。。。。
 
- 
-    
-    
+#基于bs4库的HTML格式化和编码
+soup.prettify()
+soup.a.prettify()
+
+     
+## 2.2信息组织与提取
+#信息标记的三种方式
+HTML（Hyper Text Markup Language）是www的信息组织方式,通过预定义的<>...</>标签形式组织不同类型的信息
+1.XML <name> </name> <name/> <!--name--> Internet 上的信息交互与传递
+2.JSOM 有类型的键值对 "key":"value"   "name":[“value1”,“value2”]   “key”：{“subkey”：“subvalue”} 移动应用云端和节点的信息通信，无注释
+3.YAML 无类型的键值对 key：name        各系统的配置文件，有注释易读
+                     key:#comment
+                     -value1
+                     -value2
+                     key:
+                        subkey:subvalue
+#信息提取的一般方式
+for link in soup.find_all('a'):
+    print(link.get('href'))
+#bs4库的HTML内容查找方法
+<>.find_all(name,attrs,recursive,string,** kwarg)返回一个类表类型，存储查找结果
+name 对标签名称的检索字符串
+attrs 对标签属性值的检索字符串，课标注属性检索
+recursive 是否对子孙全部检索，默认为True
+string <>...</>中字符串区域的检索字符串
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
     
     
     
