@@ -151,9 +151,7 @@ print(type(tag))
     
 #基于bs4库的HTML内容遍历方法
 #HTML基本格式
-##<html><body><p><a>   遍历方法：下行遍历、上行遍历、平行遍历
-##<head><p><a>
-##<title><b>
+##遍历方法：下行遍历、上行遍历、平行遍历
 1.标签树的下行遍历
 .contents   子节点的列表，将<tag>所有儿子节点存入列表
 .children   子节点的迭代类型，与.contents类似，用于遍历儿子节点
