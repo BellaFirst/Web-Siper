@@ -329,7 +329,52 @@ re.sub()     在一个字符串中替代所有匹配正则表达式的子串，�
 ？？    。。。。。0次或1次扩展，最小匹配
 {m，n} 扩展前一个字符m或n次，最小匹配
 
+##淘宝商品信息定向爬虫（程序没问题，应该是淘宝不允许访问）
+import requests
+import re
+def getHTMLText(url):#获得页面
+    try:
+        r=requests.get(url,timeout=30)
+        r.raise_for_status()
+        r.encoding=r.apparent_encoding
+        return r.text
+    except:
+        return " "
 
+def parsePage(ilt,html):#对获得的页面进行解析 获取名称和价格
+    try:
+        plt=re.findall(r'\"view_price\"\:\"[\d\.]*\"',html)#获得商品价格以及前面view_price标识
+        tlt=re.findall(r'\"raw_title\"\:\".*?\"',html)#获得商品名称
+        for i in range(len(plt)):
+            price=eval(plt[i].split(':')[1])
+            title=eval(tlt[i].split(':')[1])
+            ilt.append([price,title])
+    except:
+        print("")
+    
+def printGoodsList(ilt):#将商品信息输出到屏幕上
+    tplt="{:4}\t{:8}\t{:16}"
+    print(tplt.format("序号","价格","名称"))
+    count=0
+    for g in ilt:
+        count=count+1
+        print(tplt.format(count,g[0],g[1]))
+    
+def main():
+    goods='书包'
+    depth=2  #爬取深度为2页
+    start_url='https://s.taobao.com/search?q='+goods
+    infoList=[] #输出结果
+    for i in range(depth):
+        try:
+            url=start_url+'&s='+str(44*i) #对每个页面进行设计
+            html=getHTMLText(url)
+            parsePage(infoList,html)
+        except:
+            continue
+    printGoodsList(infoList)
+
+main()
 
 
 
